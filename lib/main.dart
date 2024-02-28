@@ -138,14 +138,14 @@ class HomeWidget extends StatelessWidget {
         CarouselSlider(
           options: CarouselOptions(
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 1),
+            autoPlayInterval: Duration(seconds: 3),
             enlargeCenterPage: true,
           ),
           items: [
-            'https://awsimages.detik.net.id/visual/2024/02/23/real-count-kpu-capai-7526-anies-ganjar-dapat-segini_169.png?w=650',
-            'https://images.bisnis.com/upload/img/Real_Count_KPU.jpg',
-            'https://cdn.antaranews.com/cache/1200x800/2024/02/23/antarafoto-pertemuan-ganjar-dengan-tpn-15022024-ada-2.jpg',
-          ].map((String imageUrl) {
+            'Assets/Images/beritadua.png',
+            'Assets/Images/beritasatu.jpg',
+            'Assets/Images/Beritatiga.jpg',
+          ].map((String imagePath) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
@@ -155,7 +155,7 @@ class HomeWidget extends StatelessWidget {
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
-                      image: NetworkImage(imageUrl),
+                      image: AssetImage(imagePath),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -195,10 +195,96 @@ class HomeWidget extends StatelessWidget {
 }
 
 class PartaiWidget extends StatelessWidget {
+  final List<Map<String, dynamic>> partaiData = [
+    {
+      'name': 'Golkar',
+      'image': 'Assets/Images/golkar.jpg',
+      'color': Color.fromRGBO(255, 174, 66, 1),
+    },
+    {
+      'name': 'PDIP',
+      'image': 'Assets/Images/pdip.jpg',
+      'color': Color.fromRGBO(236, 106, 87, 1),
+    },
+    {
+      'name': 'Gerindra',
+      'image': 'Assets/Images/gerindra.jpg',
+      'color': Color.fromRGBO(64, 75, 96, 1),
+    },
+    {
+      'name': 'PKS',
+      'image': 'Assets/Images/pks.jpg',
+      'color': Color.fromRGBO(245, 166, 35, 1),
+    },
+    {
+      'name': 'Demokrat',
+      'image': 'Assets/Images/demokrat.jpg',
+      'color': Color.fromRGBO(104, 118, 131, 1),
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Halaman Partai'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Daftar Partai'),
+        backgroundColor: Colors.white,
+      ),
+      body: GridView.builder(
+        padding: EdgeInsets.all(16.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+          childAspectRatio: 0.8, // adjust aspect ratio here
+        ),
+        itemCount: partaiData.length,
+        itemBuilder: (context, index) {
+          final partai = partaiData[index];
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10.0),
+                topRight: Radius.circular(10.0),
+                bottomLeft: Radius.circular(10.0),
+                bottomRight: Radius.circular(10.0),
+              ),
+              color: partai['color'],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AspectRatio(
+                  aspectRatio: 5 / 5,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
+                    child: Image.asset(
+                      partai['image'],
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Text(
+                    partai['name'],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
