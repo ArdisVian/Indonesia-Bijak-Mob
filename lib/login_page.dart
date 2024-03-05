@@ -43,11 +43,21 @@ class LoginPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => RegisterPage()),
                 );
               },
-              child: Text(
-                'Belum punya akun? Daftar Sekarang',
-                style: TextStyle(
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
+              child: RichText(
+                text: TextSpan(
+                  text: 'Belum punya akun? ',
+                  style: TextStyle(
+                    color: Colors.black, // Warna teks sebelumnya
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Daftar Sekarang',
+                      style: TextStyle(
+                        color: Colors.blue, // Warna biru untuk teks ini
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

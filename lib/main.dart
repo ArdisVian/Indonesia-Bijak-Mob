@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projek_injak/splash_screen.dart';
 import 'home_page.dart';
 import 'partai_page.dart';
 import 'kandidat_page.dart';
 import 'coblos_page.dart';
 import 'editProfile_page.dart';
 import 'login_page.dart';
-import 'register_page.dart';
 
 void main() {
   runApp(IndonesiaBijakApp());
@@ -21,7 +21,7 @@ class IndonesiaBijakApp extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: IndonesiaBijakHomePage(),
+      home: SplashScreen(),
     );
   }
 }
@@ -67,12 +67,12 @@ class _IndonesiaBijakHomePageState extends State<IndonesiaBijakHomePage> {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: NetworkImage(
-                        'https://cdn.antaranews.com/cache/1200x800/2023/09/13/Gibran-ruang-publik.jpg'), // Ganti dengan lokasi gambar profil
+                    backgroundImage: AssetImage(
+                        'Assets/Images/guest.jpg'), // Ganti dengan lokasi gambar profil
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Gibran Rakabuming',
+                    'Guest',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -80,7 +80,7 @@ class _IndonesiaBijakHomePageState extends State<IndonesiaBijakHomePage> {
                   ),
                   Expanded(
                     child: Text(
-                      'Gibran@Gmail.com',
+                      ' ',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -103,25 +103,13 @@ class _IndonesiaBijakHomePageState extends State<IndonesiaBijakHomePage> {
               },
             ),
             ListTile(
-              title: Text('Login'),
+              title: Text('Login/Register'),
               onTap: () {
                 Navigator.pop(context); // close drawer
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => LoginPage()), // Buka halaman Login
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Register'),
-              onTap: () {
-                Navigator.pop(context); // close drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          RegisterPage()), // Buka halaman Register
                 );
               },
             ),
