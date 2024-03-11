@@ -14,7 +14,7 @@ class PartaiPage extends StatelessWidget {
     },
     {
       'name': 'Gerindra',
-      'image': 'Assets/Images/gerindra.jpg',
+      'image': 'Assets/Images/pdip.jpg',
       'color': Color.fromRGBO(64, 75, 96, 1),
     },
     {
