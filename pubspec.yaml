@@ -1,8 +1,8 @@
-name: projek_injak
+name: indonesia_bijak
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: ">=3.3.0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -54,7 +54,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -63,14 +62,24 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - Assets/Images/golkar.jpg
+    - Assets/Images/PKB.jpg
+    - Assets/Images/nasdem.jpg
+    - Assets/Images/Logo-PAN-01.jpg
     - Assets/Images/pdip.jpg
     - Assets/Images/pks.jpg
     - Assets/Images/demokrat.jpg
+    - Assets/Images/demokratt.jpg
     - Assets/Images/gerindra.png
     - Assets/Images/beritasatu.jpg
     - Assets/Images/beritadua.png
     - Assets/Images/Beritatiga.jpg
     - Assets/Images/guest.jpg
+    - Assets/Images/aniesimin.png
+    - Assets/Images/prabowogibran.jpg
+    - Assets/Images/ganjarmahfud.jpg
+    - Assets/Images/HMI.jpg
+    - Assets/Images/gerindra.jpg
+    - Assets/Images/LogoGerindra.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

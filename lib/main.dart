@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projek_injak/splash_screen.dart';
+import 'package:indonesia_bijak/splash_screen.dart';
 import 'home_page.dart';
 import 'partai_page.dart';
 import 'kandidat_page.dart';

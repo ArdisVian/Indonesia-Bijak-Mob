@@ -1,95 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:indonesia_bijak/ItemsWidget.dart';
 
-class PartaiPage extends StatelessWidget {
-  final List<Map<String, dynamic>> partaiData = [
-    {
-      'name': 'Golkar',
-      'image': 'Assets/Images/golkar.jpg',
-      'color': Color.fromRGBO(255, 174, 66, 1),
-    },
-    {
-      'name': 'PDIP',
-      'image': 'Assets/Images/pdip.jpg',
-      'color': Color.fromRGBO(236, 106, 87, 1),
-    },
-    {
-      'name': 'Gerindra',
-      'image': 'Assets/Images/pdip.jpg',
-      'color': Color.fromRGBO(64, 75, 96, 1),
-    },
-    {
-      'name': 'PKS',
-      'image': 'Assets/Images/pks.jpg',
-      'color': Color.fromRGBO(245, 166, 35, 1),
-    },
-    {
-      'name': 'Demokrat',
-      'image': 'Assets/Images/demokrat.jpg',
-      'color': Color.fromRGBO(104, 118, 131, 1),
-    },
-  ];
+class PartaiPage extends StatefulWidget {
+  @override
+  _PartaiPageState createState() => _PartaiPageState();
+}
+
+class _PartaiPageState extends State<PartaiPage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Daftar Partai'),
-        backgroundColor: Colors.white,
-      ),
-      body: GridView.builder(
-        padding: EdgeInsets.all(16.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
-          childAspectRatio: 0.8, // adjust aspect ratio here
-        ),
-        itemCount: partaiData.length,
-        itemBuilder: (context, index) {
-          final partai = partaiData[index];
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10.0),
-                topRight: Radius.circular(10.0),
-                bottomLeft: Radius.circular(10.0),
-                bottomRight: Radius.circular(10.0),
-              ),
-              color: partai['color'],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AspectRatio(
-                  aspectRatio: 5 / 5,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10.0),
-                      topRight: Radius.circular(10.0),
-                    ),
-                    child: Image.asset(
-                      partai['image'],
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(top: 15),
+          child: ListView(
+            children: [
+              SizedBox(height: 5),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
                   child: Text(
-                    partai['name'],
-                    textAlign: TextAlign.center,
+                    "Kandidat Partai",
                     style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
-              ],
-            ),
-          );
-        },
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                width: MediaQuery.of(context).size.width,
+                height: 68,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 50, 54, 56),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "Temukan Partai Anda",
+                    hintStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.5),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: 30,
+                      color: Colors.white.withOpacity(0.5),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Center(
+                child: [
+                  ItemsWidget(),
+                  ItemsWidget(),
+                  ItemsWidget(),
+                  ItemsWidget(),
+                  ItemsWidget(),
+                  ItemsWidget(),
+                  ItemsWidget(),
+                  ItemsWidget(),
+                ][_tabController.index],
+              ),
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 }
