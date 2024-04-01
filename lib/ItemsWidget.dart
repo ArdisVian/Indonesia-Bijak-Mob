@@ -116,7 +116,7 @@ class ItemsWidget extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 8),
+                    padding: EdgeInsets.only(bottom: 12),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Column(
@@ -125,25 +125,25 @@ class ItemsWidget extends StatelessWidget {
                           Text(
                             nama[i],
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
                           ),
                           SizedBox(height: 5),
-                          Text(
-                            "Partai",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
-                            ),
-                          ),
+                          // Text(
+                          //   "Partai",
+                          //   style: TextStyle(
+                          //     fontSize: 15,
+                          //     color: Colors.black,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.symmetric(vertical: 2),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -157,10 +157,10 @@ class ItemsWidget extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            "Pelajari selengkapnya",
+                            "Pelajari Selengkapnya",
                             style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
                               color: Colors.black,
                             ),
                           ),
