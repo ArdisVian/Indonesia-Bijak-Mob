@@ -6,8 +6,14 @@ import 'kandidat_page.dart';
 import 'coblos_page.dart';
 import 'editProfile_page.dart';
 import 'login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(IndonesiaBijakApp());
 }
 
