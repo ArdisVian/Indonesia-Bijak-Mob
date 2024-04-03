@@ -157,9 +157,9 @@ class ItemsWidget extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            "Pelajari Selengkapnya",
+                            "Pelajari Selengkapnya>>",
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 13,
                               fontWeight: FontWeight.w800,
                               color: Colors.black,
                             ),

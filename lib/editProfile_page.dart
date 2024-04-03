@@ -7,10 +7,14 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController _usernameController = TextEditingController();
+  TextEditingController _fullNameController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
 
   @override
   void dispose() {
     _usernameController.dispose();
+    _fullNameController.dispose();
+    _addressController.dispose();
     super.dispose();
   }
 
@@ -33,12 +37,28 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
             ),
             SizedBox(height: 20),
+            TextField(
+              controller: _fullNameController,
+              decoration: InputDecoration(
+                labelText: 'Full Name',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _addressController,
+              decoration: InputDecoration(
+                labelText: 'Address',
+              ),
+            ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Implementasi aksi untuk menyimpan perubahan profil
                 String newUsername = _usernameController.text;
+                String newFullName = _fullNameController.text;
+                String newAddress = _addressController.text;
                 // Simpan perubahan ke profil
-                // Misalnya: updateUserProfile(newUsername);
+                // Misalnya: updateUserProfile(newUsername, newFullName, newAddress);
                 Navigator.pop(context); // Kembali ke halaman sebelumnya
               },
               child: Text('Simpan'),
