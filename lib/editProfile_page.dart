@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -52,12 +53,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Implementasi aksi untuk menyimpan perubahan profil
+              onPressed: () async {
                 String newUsername = _usernameController.text;
                 String newFullName = _fullNameController.text;
                 String newAddress = _addressController.text;
                 // Simpan perubahan ke profil
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setString('username', newUsername);
                 // Misalnya: updateUserProfile(newUsername, newFullName, newAddress);
                 Navigator.pop(context); // Kembali ke halaman sebelumnya
               },

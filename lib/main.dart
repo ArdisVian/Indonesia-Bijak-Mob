@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indonesia_bijak/Drawer_page.dart';
 import 'package:indonesia_bijak/splash_screen.dart';
 import 'home_page.dart';
 import 'partai_page.dart';
@@ -60,68 +61,8 @@ class _IndonesiaBijakHomePageState extends State<IndonesiaBijakHomePage> {
         title: Text('Indonesia Bijak'),
         backgroundColor: Color.fromARGB(255, 243, 90, 76),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 252, 132, 121),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage(
-                        'Assets/Images/guest.jpg'), // Ganti dengan lokasi gambar profil
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Guest',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      ' ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              title: Text('Edit Profile'),
-              onTap: () {
-                Navigator.pop(context); // close drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          EditProfilePage()), // Buka page Edit Profile
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Login/Register'),
-              onTap: () {
-                Navigator.pop(context); // close drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => LoginPage()), // Buka halaman Login
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerPage(), // Panggil DrawerPage di sini
+
       body: Center(
         // Bottom NavigationBar section
         child: _widgetOptions.elementAt(_selectedIndex),

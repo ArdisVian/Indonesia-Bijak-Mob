@@ -23,9 +23,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -44,38 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDZlVXH3UE4yCmp7CnyuI0ykaxRm5cHegQ',
-    appId: '1:391120125087:web:6b6dc5b8305ade672136aa',
-    messagingSenderId: '391120125087',
-    projectId: 'indonesia-bijak-605dc',
-    authDomain: 'indonesia-bijak-605dc.firebaseapp.com',
-    storageBucket: 'indonesia-bijak-605dc.appspot.com',
-    measurementId: 'G-5Y7DW1PEJC',
+    apiKey: 'AIzaSyA48O4ByVihjkoHIV82SjXE3qARqUS2J00',
+    appId: '1:919396843244:web:a0224d210838d1faf2afc9',
+    messagingSenderId: '919396843244',
+    projectId: 'indonesia-bijak',
+    authDomain: 'indonesia-bijak.firebaseapp.com',
+    storageBucket: 'indonesia-bijak.appspot.com',
+    measurementId: 'G-Y4Z4QCTE6G',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCOdz_d-aAW6AjniRoWxEaaAbRYFwvRp6g',
-    appId: '1:391120125087:android:7dd82eafad9645a92136aa',
-    messagingSenderId: '391120125087',
-    projectId: 'indonesia-bijak-605dc',
-    storageBucket: 'indonesia-bijak-605dc.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBqSPKePg1MtlqQGDLFv6un7szAJeJKgps',
-    appId: '1:391120125087:ios:4a7af3664f4d18d32136aa',
-    messagingSenderId: '391120125087',
-    projectId: 'indonesia-bijak-605dc',
-    storageBucket: 'indonesia-bijak-605dc.appspot.com',
-    iosBundleId: 'com.example.mobPrak',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBqSPKePg1MtlqQGDLFv6un7szAJeJKgps',
-    appId: '1:391120125087:ios:d9cc478045e205fb2136aa',
-    messagingSenderId: '391120125087',
-    projectId: 'indonesia-bijak-605dc',
-    storageBucket: 'indonesia-bijak-605dc.appspot.com',
-    iosBundleId: 'com.example.mobPrak.RunnerTests',
+    apiKey: 'AIzaSyASlelEpTYVsFqzr_RwHSJWxFOHUndmObo',
+    appId: '1:919396843244:android:61fb17c352b10a89f2afc9',
+    messagingSenderId: '919396843244',
+    projectId: 'indonesia-bijak',
+    storageBucket: 'indonesia-bijak.appspot.com',
   );
 }

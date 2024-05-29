@@ -76,11 +76,23 @@ class _RegisterPageState extends State<RegisterPage> {
       password: _passwordController.text,
     )
         .then((value) {
-      // Registrasi berhasil, navigasi ke halaman beranda
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: ((context) => HomePage())),
-      );
+      // Tambahkan nama lengkap ke profil pengguna
+
+      value.user
+          ?.updateProfile(displayName: _fullNameController.text)
+          .then((_) {
+        print("berhasil");
+        // Registrasi berhasil, navigasi ke halaman beranda
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: ((context) => HomePage())),
+        );
+      }).catchError((error) {
+        // Tangani kesalahan pembaruan profil
+        setState(() {
+          _errorMessage = 'Gagal memperbarui profil. ${error.message}';
+        });
+      });
     }).catchError((error) {
       // Tangani kesalahan registrasi
       setState(() {
