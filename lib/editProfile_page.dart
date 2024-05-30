@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indonesia_bijak/bloc/user_bloc.dart';
+import 'package:indonesia_bijak/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -7,16 +12,48 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _fullNameController = TextEditingController();
-  TextEditingController _addressController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController? _nikController = TextEditingController();
+  TextEditingController? _fullNameController = TextEditingController();
+  TextEditingController? _addressController = TextEditingController();
 
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _fullNameController.dispose();
-    _addressController.dispose();
-    super.dispose();
+  void _editProfile(BuildContext context) async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update(
+        {
+          'name': _fullNameController!.text,
+          'nik': _nikController!.text,
+          'address': _addressController!.text
+        },
+      );
+      if (!mounted) {
+        return;
+      }
+      context.read<UserBloc>().saveUser(UserModel(
+          nik: _nikController!.text,
+          name: _fullNameController!.text,
+          address: _addressController!.text));
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("success"),
+          showCloseIcon: true,
+        ),
+      );
+    } on FirebaseException catch (error) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.message!),
+        ),
+      );
+    }
   }
 
   @override
@@ -28,45 +65,61 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username',
-              ),
+        child: BlocBuilder<UserBloc, UserModel?>(builder: (context, state) {
+          if (state != null) {
+            _nikController!.text = state.nik;
+            _fullNameController!.text = state.name;
+            _addressController!.text = state.address!;
+          }
+          return Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().length != 16) {
+                      return 'tidak valid';
+                    }
+                    return null;
+                  },
+                  controller: _nikController,
+                  decoration: InputDecoration(
+                    labelText: 'NIK',
+                  ),
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'tidak valid';
+                    }
+                    return null;
+                  },
+                  controller: _fullNameController,
+                  decoration: InputDecoration(
+                    labelText: 'Full Name',
+                  ),
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  maxLines: 4,
+                  controller: _addressController,
+                  decoration: InputDecoration(
+                    labelText: 'Address',
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () async {
+                    _editProfile(context);
+                  },
+                  child: Text('Simpan'),
+                ),
+              ],
             ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _fullNameController,
-              decoration: InputDecoration(
-                labelText: 'Full Name',
-              ),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _addressController,
-              decoration: InputDecoration(
-                labelText: 'Address',
-              ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                String newUsername = _usernameController.text;
-                String newFullName = _fullNameController.text;
-                String newAddress = _addressController.text;
-                // Simpan perubahan ke profil
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                await prefs.setString('username', newUsername);
-                // Misalnya: updateUserProfile(newUsername, newFullName, newAddress);
-                Navigator.pop(context); // Kembali ke halaman sebelumnya
-              },
-              child: Text('Simpan'),
-            ),
-          ],
-        ),
+          );
+        }),
       ),
     );
   }

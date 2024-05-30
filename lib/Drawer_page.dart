@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indonesia_bijak/bloc/user_bloc.dart';
 import 'package:indonesia_bijak/editProfile_page.dart';
-import 'package:indonesia_bijak/login_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:indonesia_bijak/auth/login_page.dart';
+import 'package:indonesia_bijak/models/user_model.dart';
 
 class DrawerPage extends StatefulWidget {
   @override
@@ -9,24 +12,14 @@ class DrawerPage extends StatefulWidget {
 }
 
 class _DrawerPageState extends State<DrawerPage> {
-  String _username = 'Guest';
-
   @override
   void initState() {
     super.initState();
-    _getUsername();
-  }
-
-  Future<void> _getUsername() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String username = prefs.getString('username') ?? 'Guest';
-    setState(() {
-      _username = username;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final _currentUser = FirebaseAuth.instance.currentUser;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -39,45 +32,56 @@ class _DrawerPageState extends State<DrawerPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Username:',
+                  'Halo,',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
-                Text(
-                  _username,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
+                BlocBuilder<UserBloc, UserModel?>(builder: (context, state) {
+                  return Text(
+                    state == null ? 'Guest' : '${state.name}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  );
+                }),
               ],
             ),
           ),
+          BlocBuilder<UserBloc, UserModel?>(builder: (context, state) {
+            return ListTile(
+              title: Text('Edit Profile'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        state == null ? LoginPage() : EditProfilePage(),
+                  ),
+                );
+              },
+            );
+          }),
           ListTile(
-            title: Text('Edit Profile'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EditProfilePage(),
-                ),
-              ).then((value) {
-                _getUsername(); // Refresh username setelah kembali dari EditProfilePage
-              });
-            },
-          ),
-          ListTile(
-            title: Text('Login/Register'),
-            onTap: () {
-              Navigator.pop(context); // close drawer
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => LoginPage()), // Buka halaman Login
-              );
-            },
+            title:
+                _currentUser != null ? Text('Logout') : Text('Login/Register'),
+            onTap: _currentUser != null
+                ? () async {
+                    await FirebaseAuth.instance.signOut();
+                    context.read<UserBloc>().saveUser(null);
+                    setState(() {});
+                  }
+                : () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(),
+                      ),
+                    );
+                  },
           ),
         ],
       ),
