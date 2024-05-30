@@ -184,9 +184,9 @@ class _CoblosPageState extends State<CoblosPage> {
                                   color: Colors.black),
                             ),
                             Center(
-                              child: Container(
+                              child: SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.6,
+                                    MediaQuery.of(context).size.height * 0.625,
                                 child: PageView.builder(
                                   itemCount: kandidatData.length,
                                   itemBuilder: (context, index) {
@@ -228,7 +228,7 @@ class _CoblosPageState extends State<CoblosPage> {
                                                       BorderRadius.circular(0),
                                                   child: Image.asset(
                                                     kandidat.fotoUrl,
-                                                    height: 250,
+                                                    height: 225,
                                                     width: double.infinity,
                                                     fit: BoxFit.cover,
                                                   ),

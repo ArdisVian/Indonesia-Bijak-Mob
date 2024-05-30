@@ -35,7 +35,7 @@ class PartaiCard extends StatelessWidget {
                   child: Image.network(
                     partai.img,
                     width: MediaQuery.of(context).size.width,
-                    height: 140,
+                    height: 120,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -46,7 +46,7 @@ class PartaiCard extends StatelessWidget {
                   partai.nama,
                   textAlign: TextAlign.start,
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
@@ -68,7 +68,7 @@ class PartaiCard extends StatelessWidget {
                   child: const Text(
                     "Pelajari Selengkapnya>>",
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 12,
                       fontWeight: FontWeight.w800,
                       color: Color.fromARGB(125, 0, 0, 0),
                     ),

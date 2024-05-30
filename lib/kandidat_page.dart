@@ -112,7 +112,7 @@ class _KandidatPageState extends State<KandidatPage> {
                                 kandidat.nama,
                                 textAlign: TextAlign.justify,
                                 style: const TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -122,7 +122,7 @@ class _KandidatPageState extends State<KandidatPage> {
                               Text(
                                 kandidat.visi,
                                 textAlign: TextAlign.justify,
-                                style: const TextStyle(fontSize: 16.0),
+                                style: const TextStyle(fontSize: 14.0),
                               ),
                               const SizedBox(
                                 height: 12,
@@ -130,7 +130,7 @@ class _KandidatPageState extends State<KandidatPage> {
                               Text(
                                 kandidat.misi,
                                 textAlign: TextAlign.justify,
-                                style: const TextStyle(fontSize: 16.0),
+                                style: const TextStyle(fontSize: 14.0),
                               ),
                             ],
                           ),
